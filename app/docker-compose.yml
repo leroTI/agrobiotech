@@ -7,7 +7,7 @@ services:
     #   - "4200:80"
     labels:
       - traefik.backend=webpage
-      - traefik.frontend.rule=Host:medusalashes.com.mx
+      - traefik.frontend.rule=Host:agrobioap.frogydev.com.mx
       - traefik.docker.network=web
       - traefik.port=80
     networks:
