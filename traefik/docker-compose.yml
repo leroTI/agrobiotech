@@ -15,7 +15,7 @@ services:
       - ./traefik.toml:/traefik.toml:Z
       - ./acme.json:/acme.json:Z
     networks:
-      - web
+      - app
 networks:
   app:
     external: true
