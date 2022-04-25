@@ -53,7 +53,7 @@ services:
     ports:
       - 27018:27017
     networks:
-      - backend
+      - app
 
 networks:
   app:
