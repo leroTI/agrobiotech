@@ -41,7 +41,7 @@ services:
       - SERVICE_NAME=webserver
     # ports:
     #   - "4000:4000"
-     labels:
+    labels:
       - traefik.backend=webpage
       - traefik.frontend.rule=Host:agrobioap.frogydev.com.mx
       - traefik.docker.network=web
