@@ -3,13 +3,13 @@ version: '3.7'
 services:
   app-service:
     image: erikx3/frogy-agrobioapp:ts-22.02.07.1
-    # ports:
-    #   - "4200:80"
-    labels:
-      - traefik.backend=webpage
-      - traefik.frontend.rule=Host:agrobioap.frogydev.com.mx
-      - traefik.docker.network=web
-      - traefik.port=80
+    ports:
+      - "80:80"
+    # labels:
+    #   - traefik.backend=webpage
+    #   - traefik.frontend.rule=Host:agrobioap.frogydev.com.mx
+    #   - traefik.docker.network=web
+    #   - traefik.port=80
     networks:
       - app
   flask:
@@ -39,8 +39,13 @@ services:
       - APP_NAME=webserver
       - APP_DEBUG=true
       - SERVICE_NAME=webserver
-    ports:
-      - "4000:4000"
+    # ports:
+    #   - "4000:4000"
+     labels:
+      - traefik.backend=webpage
+      - traefik.frontend.rule=Host:agrobioap.frogydev.com.mx
+      - traefik.docker.network=web
+      - traefik.port=80
     networks:
       - app
 
