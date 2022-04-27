@@ -2,63 +2,67 @@ version: '3.7'
 
 services:
   app-service:
-    image: erikx3/frogy-agrobioapp:ts-22.02.07.1
-    ports:
-      - "80:80"
+    image: erikx3/frogy-agrobioapp:ts-22.04.25.1
+    # ports:
+    #   - "80:80"
     # labels:
     #   - traefik.backend=webpage
     #   - traefik.frontend.rule=Host:agrobioap.frogydev.com.mx
     #   - traefik.docker.network=web
     #   - traefik.port=80
-    networks:
-      - app
-  flask:
-    image: erikx3/frogy-agrobioapi:py-22.02.07.1
-    restart: always
-    environment:
-      - APP_NAME=AgroBioApi
-      - APP_ENV=prod"
-      - APP_DEBUG=False
-    expose:
-      - 4000
-    depends_on:
-      - mongodb
     labels:
-      - traefik.backend=agrobioapi
-      - traefik.frontend.rule=Host:agrobioapi.frogydev.com.mx
-      - traefik.docker.network=web
-      - traefik.port=4000
+      - traefik.enable=true
+      - traefik.http.routers.myapp.tls=true
+      - traefik.http.routers.myapp.rule=Host("agrobioapp.localhost")
     networks:
       - app
+  # flask:
+  #   image: erikx3/frogy-agrobioapi:py-22.02.07.1
+  #   restart: always
+  #   environment:
+  #     - APP_NAME=AgroBioApi
+  #     - APP_ENV=prod"
+  #     - APP_DEBUG=False
+  #   expose:
+  #     - 4000
+  #   depends_on:
+  #     - mongodb
+  #   labels:
+  #     - traefik.backend=agrobioapi
+  #     - traefik.frontend.rule=Host:agrobioapi.frogydev.com.mx
+  #     - traefik.docker.network=web
+  #     - traefik.port=4000
+  #   networks:
+  #     - app
 
-  nginx:
-    image: erikx3/agro-bioapi_nginx:nx-21.11.18.1
-    restart: always
-    environment:
-      - APP_ENV=prod
-      - APP_NAME=webserver
-      - APP_DEBUG=true
-      - SERVICE_NAME=webserver
-    # ports:
-    #   - "4000:4000"
-    labels:
-      - traefik.backend=webpage
-      - traefik.frontend.rule=Host:agrobioap.frogydev.com.mx
-      - traefik.docker.network=web
-      - traefik.port=80
-    networks:
-      - app
+  # nginx:
+  #   image: erikx3/agro-bioapi_nginx:nx-21.11.18.1
+  #   restart: always
+  #   environment:
+  #     - APP_ENV=prod
+  #     - APP_NAME=webserver
+  #     - APP_DEBUG=true
+  #     - SERVICE_NAME=webserver
+  #   # ports:
+  #   #   - "4000:4000"
+  #   labels:
+  #     - traefik.backend=webpage
+  #     - traefik.frontend.rule=Host:agrobioap.frogydev.com.mx
+  #     - traefik.docker.network=web
+  #     - traefik.port=80
+  #   networks:
+  #     - app
 
-  mongodb:
-    image: mongo
-    restart: always
-    command: mongod --noauth
-    volumes:
-      - ./mongodbdata:/data/db
-    ports:
-      - 27018:27017
-    networks:
-      - app
+  # mongodb:
+  #   image: mongo
+  #   restart: always
+  #   command: mongod --noauth
+  #   volumes:
+  #     - ./mongodbdata:/data/db
+  #   ports:
+  #     - 27018:27017
+  #   networks:
+  #     - app
 
 networks:
   app:
