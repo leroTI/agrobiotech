@@ -14,6 +14,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:Z
       - ./traefik.toml:/traefik.toml:Z
       - ./acme.json:/acme.json:Z
+    networks:
+      - web
+    
 networks:
   web:
     external: true
