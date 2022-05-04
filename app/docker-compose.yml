@@ -55,7 +55,7 @@ services:
     ports:
       - 27017:27017
     networks:
-      - backend
+      - app
 
 networks:
   app:
